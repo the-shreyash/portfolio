@@ -14,11 +14,22 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between px-5 py-5 md:px-10 md:py-6">
+        {/* Brand: Logo + Name */}
         <a
-          href="#top"
-          className="font-display text-sm font-semibold tracking-widest text-[var(--color-ink)]"
+          href="/"
+          aria-label="Shreyash Yadav Home"
+          className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] rounded-lg"
         >
-          SHREYASH
+          <div className="relative flex h-6 w-6 md:h-9 md:w-12 shrink-0 object-cover items-center justify-center overflow-hidden rounded-lg border border-[var(--color-line)] bg-black shadow-sm transition-colors group-hover:border-[var(--color-accent)]">
+            <img
+              src="/logo.png"
+              alt="Shreyash logo"
+              className="absolute h-[339%] w-auto max-w-none -top-[115%] -left-[50%] object-cover  -pointer-events-none select-none"
+            />
+          </div>
+          <span className="font-display text-sm font-semibold tracking-widest text-[var(--color-ink)]">
+            SHREYASH
+          </span>
         </a>
 
         {/* Desktop Navigation Pill + Theme Toggle */}
