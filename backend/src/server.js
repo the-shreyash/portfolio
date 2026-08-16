@@ -21,9 +21,11 @@ app.use(
       // Allow requests with no origin (like curl, postman, server-to-server)
       if (!origin) return callback(null, true);
       if (
+        allowedOrigins.includes("*") ||
         allowedOrigins.includes(origin) ||
         /^http:\/\/localhost:\d+$/.test(origin) ||
-        /^http:\/\/127\.0\.0\.1:\d+$/.test(origin)
+        /^http:\/\/127\.0\.0\.1:\d+$/.test(origin) ||
+        /\.onrender\.com$/.test(origin)
       ) {
         return callback(null, true);
       }
