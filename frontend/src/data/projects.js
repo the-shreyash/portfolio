@@ -44,7 +44,7 @@ export const featuredProjects = [
   {
     id: "kisna-ai",
     number: "03",
-    title: "Kisna AI",
+    title: "Kisan AI",
     category: "AGRI-TECH / AI / INTELLIGENT FARMING",
     description:
       "An AI-powered smart farming platform that provides intelligent crop recommendations, weather analysis, and data-driven insights for modern agriculture.",
