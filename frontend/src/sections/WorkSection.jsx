@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { ArrowUpRight, ExternalLink, Award } from "lucide-react";
 import ProjectCase from "../components/ProjectCard/ProjectCase";
+import DesignPreviewModal from "../components/DesignPreviewModal/DesignPreviewModal";
 import {
   featuredProjects as defaultFeaturedProjects,
   otherProjects as defaultOtherProjects,
@@ -11,6 +13,8 @@ export default function WorkSection({
   otherProjects = defaultOtherProjects,
   figmaDesigns = defaultFigmaDesigns,
 }) {
+  const [selectedDesign, setSelectedDesign] = useState(null);
+
   return (
     <section id="work" className="py-10 md:py-16">
       <div className="mx-auto max-w-6xl px-5 md:px-10">
@@ -83,13 +87,13 @@ export default function WorkSection({
         </p>
 
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {figmaDesigns.map((design, i) => (
-            <a
+          {figmaDesigns.map((design) => (
+            <button
+              type="button"
               key={design.id}
-              href={design.figmaUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="group relative overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-line)] bg-[var(--color-surface)] transition-all hover:border-[var(--color-accent)] hover:shadow-lg"
+              onClick={() => setSelectedDesign(design)}
+              data-cursor="PREVIEW"
+              className="group relative overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-line)] bg-[var(--color-surface)] text-left transition-all hover:border-[var(--color-accent)] hover:shadow-lg cursor-pointer"
             >
               {/* Screenshot preview area */}
               <div className="relative h-44 w-full overflow-hidden bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-bg)]">
@@ -122,7 +126,6 @@ export default function WorkSection({
                 </div>
               </div>
 
-
               <div className="p-5">
                 <div className="flex items-start justify-between">
                   <h4 className="font-display text-lg font-medium tracking-tight">
@@ -137,13 +140,20 @@ export default function WorkSection({
                   {design.description}
                 </p>
                 <p className="mt-4 text-[10px] font-medium uppercase tracking-widest text-[var(--color-accent)] opacity-0 transition-opacity group-hover:opacity-100">
-                  Open in Figma →
+                  Preview Design →
                 </p>
               </div>
-            </a>
+            </button>
           ))}
         </div>
       </div>
+
+      {/* ── In-Page Design Lightbox Modal ── */}
+      <DesignPreviewModal
+        design={selectedDesign}
+        isOpen={Boolean(selectedDesign)}
+        onClose={() => setSelectedDesign(null)}
+      />
     </section>
   );
 }
